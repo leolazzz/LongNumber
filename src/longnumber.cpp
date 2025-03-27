@@ -105,6 +105,11 @@ void LongNum::setPrecision(int prec) {
 }
 
 void LongNum::normalize() {
+    if(base == 2){
+        while (digits.size() > 1 && digits.size() > std::min(precisionMax + exp, 1000)){
+            digits.pop_back();
+        }
+    }
     while (digits.size() > 1 && digits.back() == 0) {
         digits.pop_back();
     }
