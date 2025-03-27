@@ -304,6 +304,17 @@ LongNum operator/(const LongNum& left, const LongNum& right)  {
     if (right.digits.size() == 1 && right.digits[0] == 0) {
         throw "division by zero is prohibited";
     }
+    if(left.base == 2){
+        LongNum zn1 = left;
+        LongNum zn2 = right;
+        zn1.isNegative = 0;
+        zn2.isNegative = 0;
+        if(zn1 == zn2){
+            LongNum tmp(1);
+            tmp.isNegative = left.isNegative ^ right.isNegative;
+            return tmp;
+        }
+    }
     return left * right.inverse();
 }
 
